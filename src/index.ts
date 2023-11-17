@@ -110,7 +110,7 @@ class PicoSlider extends HTMLElement {
       }
 
       this.images.forEach((image) => {
-        image.classList.add('pico-slider__item');
+        image.classList.add(`${namespace}__item`);
         image.setAttribute('loading', 'lazy');
         image.removeAttribute('width');
         image.removeAttribute('height');
