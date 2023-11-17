@@ -1,0 +1,7 @@
+src
+coverage
+.prettierrc.cjs
+tsconfig.json
+types.d.ts
+vite.config.json
+.nvmrc
