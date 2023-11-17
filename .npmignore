@@ -3,6 +3,6 @@ coverage
 .prettierrc.cjs
 tsconfig.json
 types.d.ts
-vite.config.json
+vite.config.js
 .nvmrc
 .husky
