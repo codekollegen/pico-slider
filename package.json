@@ -1,6 +1,6 @@
 {
   "name": "pico-slider",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": {
     "name": "Henning Rothe",
     "email": "henning@codekollegen.de"
@@ -32,6 +32,6 @@
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.3",
     "vitest": "^0.34.6",
-    "webcjs": "^1.0.3"
+    "webcjs": "^1.0.4"
   }
 }
