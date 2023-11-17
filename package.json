@@ -1,0 +1,33 @@
+{
+  "name": "pico-slider",
+  "version": "1.0.0",
+  "author": {
+    "name": "Henning Rothe",
+    "email": "henning@codekollegen.de"
+  },
+  "description": "A small, responsive and lightweight image slider",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest"
+  },
+  "keywords": [
+    "image",
+    "images",
+    "slider"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "webcjs": "^1.0.3",
+    "eslint": "^8.53.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.1.0",
+    "sass": "^1.69.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.3",
+    "vitest": "^0.34.6"
+  }
+}
