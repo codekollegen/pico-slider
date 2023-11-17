@@ -110,7 +110,7 @@ class PicoSlider extends HTMLElement {
       }
 
       this.images.forEach((image) => {
-        image.classList.add('gallery__item');
+        image.classList.add('pico-slider__item');
         image.setAttribute('loading', 'lazy');
         image.removeAttribute('width');
         image.removeAttribute('height');
@@ -124,7 +124,7 @@ class PicoSlider extends HTMLElement {
   }
 
   addScrollListener() {
-    let scrollingTimeout: number;
+    let scrollingTimeout: NodeJS.Timeout;
 
     this.galleryRef?.addEventListener('scroll', (ev) => {
       clearTimeout(scrollingTimeout);
@@ -172,6 +172,11 @@ class PicoSlider extends HTMLElement {
         </div>
       </div>
     `;
+
+    this.galleryRef = this.shadowRoot.querySelector(`.${namespace}`)!;
+    this.loadingRef = this.shadowRoot.querySelector(`.${namespace}-loading-overlay`)!;
+    this.loadedRef = this.shadowRoot.querySelector(`.${namespace}-loading-overlay__loaded`)!;
+    this.totalRef = this.shadowRoot.querySelector(`.${namespace}-loading-overlay__total`)!;
   }
 }
 
