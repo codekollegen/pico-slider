@@ -9,9 +9,11 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "build": "vite build",
-    "test": "vitest"
+    "prettier": "prettier --write .",
+    "test": "vitest --coverage --reporter verbose --run --dom -r ."
   },
   "keywords": [
     "image",
@@ -20,14 +22,16 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "webcjs": "^1.0.3",
+    "@vitest/coverage-v8": "^0.34.6",
     "eslint": "^8.53.0",
+    "happy-dom": "^12.10.3",
     "husky": "^8.0.3",
     "prettier": "^3.1.0",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.3",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "webcjs": "^1.0.3"
   }
 }
