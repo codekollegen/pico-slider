@@ -53,17 +53,11 @@
     }
 
     &:first-child {
-      padding-left: calc(
-        50vw - (min(var(--container-width), 100%) / 2) +
-          var(--container-padding)
-      );
+      padding-left: calc(50vw - (min(var(--container-width), 100%) / 2) + var(--container-padding));
     }
 
     &:last-child {
-      padding-right: calc(
-        50vw - (min(var(--container-width), 100%) / 2) +
-          var(--container-padding)
-      );
+      padding-right: calc(50vw - (min(var(--container-width), 100%) / 2) + var(--container-padding));
     }
   }
 }
@@ -83,7 +77,7 @@
     height: 4px;
     border-radius: 4px;
     background-color: var(--color-primary);
-    content: " ";
+    content: ' ';
     animation: rotate 1s ease-in-out infinite;
   }
 }
@@ -122,7 +116,7 @@
   border-style: solid;
   border-width: 2px 2px 0 0;
   border-radius: 1px;
-  content: " ";
+  content: ' ';
   width: 15px;
   height: 15px;
   position: relative;

@@ -1,10 +1,15 @@
-import styles from "./styles.scss?inline";
-import { Attribute, Component } from "webcjs";
+import styles from './styles.scss?inline';
+import { Attribute, Component } from 'webcjs';
 
-const namespace = "pico-slider";
+const namespace = 'pico-slider';
+
+const events = {
+  loadingProgress: 'loading-progress',
+  finishedLoading: 'finished-loading',
+};
 
 @Component
-export class PicoSlider extends HTMLElement {
+class PicoSlider extends HTMLElement {
   @Attribute()
   selectedIndex = 0;
 
@@ -22,7 +27,7 @@ export class PicoSlider extends HTMLElement {
 
   constructor() {
     super();
-    this.shadowRoot = this.attachShadow({ mode: "open" });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
 
     this.loadedImagesCount = 0;
     this.renderComplete = false;
@@ -54,6 +59,10 @@ export class PicoSlider extends HTMLElement {
 
   imageLoaded() {
     this.loadedImagesCount++;
+    this.emit({
+      name: events.loadingProgress,
+      payload: { loadedImagesCount: this.loadedImagesCount, totalImageCount: this.images.length },
+    });
 
     if (this.loadedRef) {
       this.loadedRef.innerHTML = `${this.loadedImagesCount}`;
@@ -69,31 +78,30 @@ export class PicoSlider extends HTMLElement {
       this.loadingRef?.remove();
       this.scrollToSelectedIndex();
       this.renderComplete = true;
+
+      this.emit({ name: events.finishedLoading, payload: this.images });
     }
   }
 
   addClickListener() {
-    this.shadowRoot.addEventListener("click", ({ target }) => {
+    this.shadowRoot.addEventListener('click', ({ target }) => {
       const { action } = (target as HTMLElement).dataset;
 
-      if (action === "prev") {
-        this.selectedIndex =
-          this.selectedIndex >= 1 ? this.selectedIndex - 1 : 0;
+      if (action === 'prev') {
+        this.selectedIndex = this.selectedIndex >= 1 ? this.selectedIndex - 1 : 0;
         this.scrollToSelectedIndex();
       }
 
-      if (action === "next") {
+      if (action === 'next') {
         this.selectedIndex =
-          this.selectedIndex < this.images.length - 1
-            ? this.selectedIndex + 1
-            : this.images.length - 1;
+          this.selectedIndex < this.images.length - 1 ? this.selectedIndex + 1 : this.images.length - 1;
         this.scrollToSelectedIndex();
       }
     });
   }
 
   addSlotChangeListener() {
-    this.shadowRoot.addEventListener("slotchange", (ev) => {
+    this.shadowRoot.addEventListener('slotchange', (ev) => {
       const slot = ev.target as HTMLSlotElement;
       this.images = slot?.assignedElements() as HTMLImageElement[];
 
@@ -102,10 +110,10 @@ export class PicoSlider extends HTMLElement {
       }
 
       this.images.forEach((image) => {
-        image.classList.add("gallery__item");
-        image.setAttribute("loading", "lazy");
-        image.removeAttribute("width");
-        image.removeAttribute("height");
+        image.classList.add('gallery__item');
+        image.setAttribute('loading', 'lazy');
+        image.removeAttribute('width');
+        image.removeAttribute('height');
         image.onload = () => this.imageLoaded();
 
         if (image.complete) {
@@ -118,16 +126,13 @@ export class PicoSlider extends HTMLElement {
   addScrollListener() {
     let scrollingTimeout: number;
 
-    this.galleryRef?.addEventListener("scroll", (ev) => {
+    this.galleryRef?.addEventListener('scroll', (ev) => {
       clearTimeout(scrollingTimeout);
 
       scrollingTimeout = setTimeout(() => {
         const scrollLeft = this.galleryRef?.scrollLeft ?? 0;
         this.selectedIndex = this.images.findIndex((image) => {
-          return (
-            image.offsetLeft <= scrollLeft &&
-            image.offsetLeft + image.clientWidth >= scrollLeft
-          );
+          return image.offsetLeft <= scrollLeft && image.offsetLeft + image.clientWidth >= scrollLeft;
         });
       }, 100);
     });
@@ -136,7 +141,7 @@ export class PicoSlider extends HTMLElement {
   scrollToSelectedIndex() {
     this.galleryRef?.scrollTo({
       left: this.images[this.selectedIndex].offsetLeft,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }
 
@@ -173,3 +178,5 @@ export class PicoSlider extends HTMLElement {
 if (!customElements.get(namespace)) {
   customElements.define(namespace, PicoSlider);
 }
+
+export default PicoSlider;

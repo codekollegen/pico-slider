@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   build: {
     lib: {
-      name: "pico-slider",
-      formats: ["es"],
-      entry: "src/index.ts",
+      name: 'pico-slider',
+      formats: ['es'],
+      entry: 'src/index.ts',
       fileName: (format) => `index.js`,
     },
   },
