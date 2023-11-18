@@ -6,6 +6,7 @@ const namespace = 'pico-slider';
 const events = {
   loadingProgress: 'loading-progress',
   finishedLoading: 'finished-loading',
+  selectedIndexChange: 'selected-index-change',
 };
 
 @Component
@@ -131,9 +132,11 @@ class PicoSlider extends HTMLElement {
 
       scrollingTimeout = setTimeout(() => {
         const scrollLeft = this.galleryRef?.scrollLeft ?? 0;
-        this.selectedIndex = this.images.findIndex((image) => {
-          return image.offsetLeft <= scrollLeft && image.offsetLeft + image.clientWidth >= scrollLeft;
-        });
+        this.updateSelectedIndex(
+          this.images.findIndex((image) => {
+            return image.offsetLeft <= scrollLeft && image.offsetLeft + image.clientWidth >= scrollLeft;
+          })
+        );
       }, 100);
     });
   }
@@ -143,6 +146,16 @@ class PicoSlider extends HTMLElement {
       left: this.images[this.selectedIndex].offsetLeft,
       behavior: 'smooth',
     });
+  }
+
+  updateSelectedIndex(index: number) {
+    if (index === -1) {
+      return;
+    }
+
+    const oldIndex = this.selectedIndex;
+    this.selectedIndex = index;
+    this.emit({ name: events.selectedIndexChange, payload: { oldIndex, newIndex: this.selectedIndex } });
   }
 
   emit<T>({ name, payload }: { name: string; payload: T }) {

@@ -1,9 +1,13 @@
 {
   "name": "pico-slider",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": {
     "name": "Henning Rothe",
     "email": "henning@codekollegen.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codekollegen/pico-slider"
   },
   "description": "A small, responsive and lightweight image slider",
   "type": "module",
@@ -18,7 +22,10 @@
   "keywords": [
     "image",
     "images",
-    "slider"
+    "slider",
+    "webcomponent",
+    "component",
+    "element"
   ],
   "license": "ISC",
   "devDependencies": {
