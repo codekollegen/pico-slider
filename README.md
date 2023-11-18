@@ -16,7 +16,7 @@ You can also just add the script tag to your website, and load pico slider from 
 recommended.
 
 ```html
-<script src="https://unpkg.com/pico-slider/dist/index.js" async defer></script>
+<script src="https://unpkg.com/pico-slider/dist/index.js" type="module" async defer></script>
 ```
 
 ## Usage
@@ -60,6 +60,7 @@ The Pico Slider component emits events that you can listen to. The currently emi
 
 - pico-slider.loading-progress
 - pico-slider.finished-loading
+- pico-slider.selected-index-change
 
 You can easily listen to those events via a vanilla js event listener either on the document or the element itself.
 
