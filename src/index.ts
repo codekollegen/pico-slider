@@ -147,7 +147,7 @@ class PicoSlider extends HTMLElement {
 
   emit<T>({ name, payload }: { name: string; payload: T }) {
     this.dispatchEvent(
-      new CustomEvent(name, {
+      new CustomEvent(`${namespace}.${name}`, {
         bubbles: true,
         cancelable: true,
         composed: true,
